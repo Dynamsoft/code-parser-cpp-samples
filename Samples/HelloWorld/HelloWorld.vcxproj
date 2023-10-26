@@ -104,8 +104,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /ys "$(SolutionDir)..\..\Lib\Windows\$(PlatformTarget)\*.dll" "$(OutputPath)"
-xcopy /y "$(SolutionDir)..\..\ParserResources" "$(OutputPath)ParserResources\"</Command>
+      <Command>xcopy /ys "$(SolutionDir)..\..\Distributables\Lib\Windows\$(PlatformTarget)\*.dll" "$(OutputPath)"
+xcopy /y "$(SolutionDir)..\..\Distributables\ParserResources" "$(OutputPath)ParserResources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -123,8 +123,8 @@ xcopy /y "$(SolutionDir)..\..\ParserResources" "$(OutputPath)ParserResources\"</
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /ys "$(SolutionDir)..\..\Lib\Windows\$(PlatformTarget)\*.dll" "$(OutputPath)"
-xcopy /y "$(SolutionDir)..\..\ParserResources" "$(OutputPath)ParserResources\"</Command>
+      <Command>xcopy /ys "$(SolutionDir)..\..\Distributables\Lib\Windows\$(PlatformTarget)\*.dll" "$(OutputPath)"
+xcopy /y "$(SolutionDir)..\..\Distributables\ParserResources" "$(OutputPath)ParserResources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -146,8 +146,8 @@ xcopy /y "$(SolutionDir)..\..\ParserResources" "$(OutputPath)ParserResources\"</
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /ys "$(SolutionDir)..\..\Lib\Windows\$(PlatformTarget)\*.dll" "$(OutputPath)"
-xcopy /y "$(SolutionDir)..\..\ParserResources" "$(OutputPath)ParserResources\"</Command>
+      <Command>xcopy /ys "$(SolutionDir)..\..\Distributables\Lib\Windows\$(PlatformTarget)\*.dll" "$(OutputPath)"
+xcopy /y "$(SolutionDir)..\..\Distributables\ParserResources" "$(OutputPath)ParserResources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -169,8 +169,8 @@ xcopy /y "$(SolutionDir)..\..\ParserResources" "$(OutputPath)ParserResources\"</
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /ys "$(SolutionDir)..\..\Lib\Windows\$(PlatformTarget)\*.dll" "$(OutputPath)"
-xcopy /y "$(SolutionDir)..\..\ParserResources" "$(OutputPath)ParserResources\"</Command>
+      <Command>xcopy /ys "$(SolutionDir)..\..\Distributables\Lib\Windows\$(PlatformTarget)\*.dll" "$(OutputPath)"
+xcopy /y "$(SolutionDir)..\..\Distributables\ParserResources" "$(OutputPath)ParserResources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

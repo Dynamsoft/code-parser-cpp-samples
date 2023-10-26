@@ -1,8 +1,8 @@
 CC=gcc
 CCFLAGS=-c -std=c++11
 
-DCP_PARSERRESOURCES_PATH=../../ParserResources
-DS_LIB_PATH="../../Lib/Linux/x64"
+DCP_PARSERRESOURCES_PATH=../../Distributables/ParserResources
+DS_LIB_PATH="../../Distributables/Lib/Linux/x64"
 LDFLAGS=-L $(DS_LIB_PATH) -Wl,-rpath=$(DS_LIB_PATH) -Wl,-rpath=./
 DS_LIB=-lDynamsoftCodeParser -lDynamsoftLicense -lDynamsoftCore
 
