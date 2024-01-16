@@ -54,7 +54,7 @@ int main(int, char**) {
 	if (dcpResult != NULL)
 	{
 		string codeType = dcpResult->GetCodeType();
-		cout << "CodeType: " << codeType << endl;
+		cout << "CodeType: " << codeType.c_str() << endl;
 		if (codeType == "MRTD_TD1_ID")
 		{
 			if (dcpResult->GetFieldValue("documentNumber") != NULL)
@@ -147,7 +147,7 @@ int main(int, char**) {
 
 	// Free the memory allocated for results
 	if (dcpResult != NULL)
-		delete dcpResult;
+		dcpResult->Release();
 	if (dcp != NULL)
 		delete dcp;
 
