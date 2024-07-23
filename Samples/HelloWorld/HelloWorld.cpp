@@ -24,133 +24,132 @@ using namespace dynamsoft::license;
 #endif
 #endif
 
-
-int main(int, char**) {
+int main(int, char **)
+{
 	int errorCode = 0;
 	char errorBuf[512];
-	CParsedResultItem* parseResult = NULL;
+	CParsedResultItem *parseResult = NULL;
 
 	// Initialize license.
-	// You can request and extend a trial license from https://www.dynamsoft.com/customer/license/trialLicense?product=dcp&utm_source=samples&package=c_cpp 
+	// You can request and extend a trial license from https://www.dynamsoft.com/customer/license/trialLicense?product=dcp&utm_source=samples&package=c_cpp
 	// The string 'DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9' here is a free public trial license. Note that network connection is required for this license to work.
 	errorCode = CLicenseManager::InitLicense("DLS2eyJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSJ9", errorBuf, 512);
-	if (errorCode != EC_OK)
+	if (errorCode != ErrorCode::EC_OK && errorCode != ErrorCode::EC_LICENSE_CACHE_USED)
 	{
-		// Add your code for license error processing;
-		cout << errorBuf << endl;
-	}
-
-	// Create an instance of Code Parser
-	CCodeParser* dcp = new CCodeParser();
-
-
-	// Input source code
-	char code[1024];
-	cout << "Input your source code:";
-	cin.getline(code, 1024);
-
-	// Parse the code
-	CParsedResultItem* dcpResult = dcp->Parse((unsigned char*)code, strlen(code), "", &errorCode);
-	if (dcpResult != NULL)
-	{
-		string codeType = dcpResult->GetCodeType();
-		cout << "CodeType: " << codeType.c_str() << endl;
-		if (codeType == "MRTD_TD1_ID")
-		{
-			if (dcpResult->GetFieldValue("documentNumber") != NULL)
-			{
-				cout << "Value of document number: " << dcpResult->GetFieldValue("documentNumber") << endl;
-			}
-			// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/mrtd.html#mrtd_td1_id-fields for more supported fields
-		}
-		if (codeType == "MRTD_TD2_ID")
-		{
-			if (dcpResult->GetFieldValue("documentNumber") != NULL)
-			{
-				cout << "Value of document number: " << dcpResult->GetFieldValue("documentNumber") << endl;
-			}
-			// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/mrtd.html#mrtd_td2_id-fields for more supported fields
-		}
-		if (codeType == "MRTD_TD2_VISA")
-		{
-			if (dcpResult->GetFieldValue("documentNumber") != NULL)
-			{
-				cout << "Value of document number: " << dcpResult->GetFieldValue("documentNumber") << endl;
-			}
-			// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/mrtd.html#mrtd_td2_visa-fields for more supported fields
-		}
-		if (codeType == "MRTD_TD3_PASSPORT")
-		{
-			if (dcpResult->GetFieldValue("passportNumber") != NULL)
-			{
-				cout << "Value of passport number: " << dcpResult->GetFieldValue("passportNumber") << endl;
-			}
-			// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/mrtd.html#mrtd_td3_passport-fields for more supported fields
-		}
-		if (codeType == "MRTD_TD3_VISA")
-		{
-			if (dcpResult->GetFieldValue("documentNumber") != NULL)
-			{
-				cout << "Value of document number: " << dcpResult->GetFieldValue("documentNumber") << endl;
-			}
-			// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/mrtd.html#mrtd_td3_visa-fields for more supported fields
-		}
-		if (codeType == "AAMVA_DL_ID")
-		{
-			if (dcpResult->GetFieldValue("licenseNumber") != NULL)
-			{
-				cout << "Value of license number: " << dcpResult->GetFieldValue("licenseNumber") << endl;
-			}
-			// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/aamva-dl-id.html#aamva_dl_id-fields for more supported fields
-		}
-		if (codeType == "AAMVA_DL_ID_WITH_MAG_STRIPE")
-		{
-			if (dcpResult->GetFieldValue("DLorID_Number") != NULL)
-			{
-				cout << "Value of ID number: " << dcpResult->GetFieldValue("DLorID_Number") << endl;
-			}
-			// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/aamva-dl-id.html#aamva_dl_id_with_mag_stripe-fields for more supported fields
-		}
-		if (codeType == "SOUTH_AFRICA_DL")
-		{
-			if (dcpResult->GetFieldValue("idNumber") != NULL)
-			{
-				cout << "Value of ID number: " << dcpResult->GetFieldValue("idNumber") << endl;
-			}
-			// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/za-dl.html#fields for more supported fields
-		}
-		if (codeType == "AADHAAR")
-		{
-			if (dcpResult->GetFieldValue("idNumber") != NULL)
-			{
-				cout << "Value of ID number: " << dcpResult->GetFieldValue("idNumber") << endl;
-			}
-			// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/aadhaar.html#fields for more supported fields
-		}
-		if (codeType == "VIN")
-		{
-			if (dcpResult->GetFieldValue("WMI") != NULL)
-			{
-				cout << "Value of WMI: " << dcpResult->GetFieldValue("WMI") << endl;
-			}
-			// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/vin.html#fields for more supported fields
-		}
-	}
-	else if (errorCode != ErrorCode::EC_OK)
-	{
-		cout << DC_GetErrorString(errorCode) << endl;
+		cout << "License initialization failed: ErrorCode: " << errorCode << ", ErrorString: " << errorBuf << endl;
 	}
 	else
 	{
-		cout << "No parsing result for the code." << endl;
+		// Create an instance of Code Parser
+		CCodeParser *dcp = new CCodeParser();
+
+		// Input source code
+		char code[1024];
+		cout << "Input your source code:";
+		cin.getline(code, 1024);
+
+		// Parse the code
+		CParsedResultItem *dcpResult = dcp->Parse((unsigned char *)code, strlen(code), "", &errorCode);
+		if (dcpResult != NULL)
+		{
+			string codeType = dcpResult->GetCodeType();
+			cout << "CodeType: " << codeType.c_str() << endl;
+			if (codeType == "MRTD_TD1_ID")
+			{
+				if (dcpResult->GetFieldValue("documentNumber") != NULL)
+				{
+					cout << "Value of document number: " << dcpResult->GetFieldValue("documentNumber") << endl;
+				}
+				// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/mrtd.html#mrtd_td1_id-fields for more supported fields
+			}
+			if (codeType == "MRTD_TD2_ID")
+			{
+				if (dcpResult->GetFieldValue("documentNumber") != NULL)
+				{
+					cout << "Value of document number: " << dcpResult->GetFieldValue("documentNumber") << endl;
+				}
+				// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/mrtd.html#mrtd_td2_id-fields for more supported fields
+			}
+			if (codeType == "MRTD_TD2_VISA")
+			{
+				if (dcpResult->GetFieldValue("documentNumber") != NULL)
+				{
+					cout << "Value of document number: " << dcpResult->GetFieldValue("documentNumber") << endl;
+				}
+				// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/mrtd.html#mrtd_td2_visa-fields for more supported fields
+			}
+			if (codeType == "MRTD_TD3_PASSPORT")
+			{
+				if (dcpResult->GetFieldValue("passportNumber") != NULL)
+				{
+					cout << "Value of passport number: " << dcpResult->GetFieldValue("passportNumber") << endl;
+				}
+				// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/mrtd.html#mrtd_td3_passport-fields for more supported fields
+			}
+			if (codeType == "MRTD_TD3_VISA")
+			{
+				if (dcpResult->GetFieldValue("documentNumber") != NULL)
+				{
+					cout << "Value of document number: " << dcpResult->GetFieldValue("documentNumber") << endl;
+				}
+				// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/mrtd.html#mrtd_td3_visa-fields for more supported fields
+			}
+			if (codeType == "AAMVA_DL_ID")
+			{
+				if (dcpResult->GetFieldValue("licenseNumber") != NULL)
+				{
+					cout << "Value of license number: " << dcpResult->GetFieldValue("licenseNumber") << endl;
+				}
+				// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/aamva-dl-id.html#aamva_dl_id-fields for more supported fields
+			}
+			if (codeType == "AAMVA_DL_ID_WITH_MAG_STRIPE")
+			{
+				if (dcpResult->GetFieldValue("DLorID_Number") != NULL)
+				{
+					cout << "Value of ID number: " << dcpResult->GetFieldValue("DLorID_Number") << endl;
+				}
+				// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/aamva-dl-id.html#aamva_dl_id_with_mag_stripe-fields for more supported fields
+			}
+			if (codeType == "SOUTH_AFRICA_DL")
+			{
+				if (dcpResult->GetFieldValue("idNumber") != NULL)
+				{
+					cout << "Value of ID number: " << dcpResult->GetFieldValue("idNumber") << endl;
+				}
+				// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/za-dl.html#fields for more supported fields
+			}
+			if (codeType == "AADHAAR")
+			{
+				if (dcpResult->GetFieldValue("idNumber") != NULL)
+				{
+					cout << "Value of ID number: " << dcpResult->GetFieldValue("idNumber") << endl;
+				}
+				// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/aadhaar.html#fields for more supported fields
+			}
+			if (codeType == "VIN")
+			{
+				if (dcpResult->GetFieldValue("WMI") != NULL)
+				{
+					cout << "Value of WMI: " << dcpResult->GetFieldValue("WMI") << endl;
+				}
+				// Check out https://www.dynamsoft.com/code-parser/docs/core/code-types/vin.html#fields for more supported fields
+			}
+		}
+		else if (errorCode != ErrorCode::EC_OK)
+		{
+			cout << DC_GetErrorString(errorCode) << endl;
+		}
+		else
+		{
+			cout << "No parsing result for the code." << endl;
+		}
+
+		// Free the memory allocated for results
+		if (dcpResult != NULL)
+			dcpResult->Release();
+		if (dcp != NULL)
+			delete dcp;
 	}
-
-	// Free the memory allocated for results
-	if (dcpResult != NULL)
-		dcpResult->Release();
-	if (dcp != NULL)
-		delete dcp;
-
 	cout << "Press any key to quit..." << endl;
 	cin.ignore();
 	return 0;
